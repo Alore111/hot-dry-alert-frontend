@@ -1,0 +1,376 @@
+* {
+    /*全局选择器*/
+    margin: 0px;
+    padding: 0px;
+}
+ 
+#shiming {
+    /*市名简介*/
+    clear: both;
+    /*浮动清除*/
+    margin-top: 30px;
+    background-color: rgb(255, 255, 255);
+    padding: 15px;
+    border-color: rgb(75, 99, 153);
+    border-style: dashed;
+    /*虚线 */
+    border-radius: 10px;
+}
+ 
+#shiming img {
+    /*市名图片*/
+    border-radius: 5%;
+    /*边框弧度*/
+    width: 150px;
+    height: 150px;
+    float: left;
+    /*左浮动*/
+    margin: 5px 10px 0px 5px;
+}
+ 
+#shiming img:hover {
+    /*图片划过时*/
+    transform: scale(1.2);
+    /*图片放大*/
+}
+ 
+#shiming p {
+    /*市名文本设置*/
+    letter-spacing: 2px;
+    /*字体间隔*/
+    text-indent: 2em;
+    /*缩进*/
+    line-height: 1.5em;
+}
+ 
+#shihua {
+    /*市花1*/
+    clear: both;
+    /*浮动清除*/
+    margin-top: 20px;
+    padding: 5px;
+    /*内边距*/
+    height: 230px;
+    background-color: rgb(255, 255, 255);
+    border-color: rgb(75, 99, 153);
+    border-style: dashed;
+    /*虚线*/
+    border-radius: 10px;
+ 
+}
+ 
+#shihua1 {
+    /*市花2*/
+    height: 230px;
+    float: left;
+    /*左浮动*/
+}
+ 
+#shishu {
+    /*市花1*/
+    clear: both;
+    /*浮动清除*/
+    margin-top: 20px;
+    padding: 5px;
+    /*内边距*/
+    height: 350px;
+    background-color: rgb(255, 255, 255);
+    border-color: rgb(75, 99, 153);
+    border-style: dashed;
+    /*虚线*/
+    border-radius: 10px;
+}
+
+#shishu1 {
+    /*市树*/
+    height: 350px;
+    float: left;
+    /*右浮动*/
+}
+ 
+#hua {
+    /*花图片*/
+    border-radius: 5%;
+    /*图片弧度*/
+    width: 200px;
+    height: 200px;
+    float: left;
+    /*左浮动*/
+    margin: 5px 10px 0px 5px;
+}
+ 
+#hua:hover {
+    /*划过图片时*/
+    transform: scale(1.2);
+    /*图片放大*/
+ 
+}
+ 
+#shu {
+    /*树图片*/
+    border-radius: 5%;
+    /*图片弧度*/
+    width: 200px;
+    height: 200px;
+    float: left;
+    /*左浮动*/
+    margin: 0px 10px 0px 0px;
+}
+ 
+#shu:hover {
+    /*鼠标化过时*/
+    transform: scale(1.2);
+    /*图片放大*/
+}
+ 
+#shihua p {
+    /*市花文本设置*/
+    letter-spacing: 2px;
+    /*字间距*/
+    text-indent: 2em;
+    /*缩进*/
+    line-height: 1.5em;
+}
+ 
+#dili {
+    /*地理*/
+    clear: both;
+    /*清除浮动*/
+    background-color: rgb(255, 255, 255);
+    padding: 15px;
+    margin-top: 20px;
+    border-color: rgb(75, 99, 153);
+    border-style: dashed;
+    border-radius: 10px;
+ 
+}
+ 
+#dili img {
+    /*地理图片*/
+    width: 300px;
+    height: 300px;
+    float: left;
+    /*左浮动*/
+    margin: 0px 20px 0px 10px;
+    padding: 10px 10px 10px 0px;
+    border-radius: 5px;
+    border: 1px solid rgb(20, 3, 31);
+    /*左浮动*/
+}
+ 
+#dili img:hover {
+    /*鼠标划过时*/
+    transform: scale(1.2);
+    /*图片放大*/
+}
+ 
+#dili p {
+    /*地理文本设置*/
+    letter-spacing: 2px;
+    /*字间间距*/
+    text-indent: 2em;
+    line-height: 1.5em;
+}
+ 
+#lishi {
+    /*历史*/
+    clear: both;
+    background-color: rgb(255, 255, 255);
+    padding: 15px;
+    margin-top: 20px;
+    border-color: rgb(75, 99, 153);
+    border-style: dashed;
+    /*边框样式*/
+    border-radius: 10px;
+    /*边框弧度*/
+ 
+}
+ 
+#lishi p {
+    /*历史字段*/
+    letter-spacing: 2px;
+    /*字间距*/
+    text-indent: 2em;
+    /*缩进*/
+    line-height: 1.5em;
+}
+ 
+#lishi img {
+    /*历史图片*/
+    width: 300px;
+    height: 300px;
+    float: left;
+    margin: 5px 10px 0px 10px;
+    border-radius: 5px;
+    /*边框弧度*/
+ 
+}
+ 
+#lishi img:hover {
+    /*历史图片划过时*/
+    transform: scale(1.2);
+}
+ 
+#ziyuan {
+    /*资源*/
+    clear: both;
+    background-color: rgb(255, 255, 255);
+    padding: 15px;
+    margin-top: 20px;
+    border-color: rgb(75, 99, 153);
+    border-style: dashed;
+    /*边框样式*/
+    border-radius: 10px;
+    /*边框弧度*/
+ 
+}
+ 
+#ziyuan p {
+    /*资源字段*/
+    letter-spacing: 2px;
+    /*字间距*/
+    text-indent: 2em;
+    /*文段缩进*/
+    line-height: 1.5em;
+}
+ 
+#ziyuan img {
+    /*资源图片*/
+    width: 150px;
+    height: 100px;
+    float: left;
+    margin: 5px 10px 0px 10px;
+    border-radius: 5px;
+ 
+}
+ 
+#ziyuan img:hover {
+    /*鼠标划过时资源图片*/
+    transform: scale(1.2);
+}
+ 
+#quhua {
+    /*行政区划*/
+    clear: both;
+    background-color: rgb(255, 255, 255);
+    padding: 15px;
+    margin-top: 20px;
+    border-color: rgb(75, 99, 153);
+    border-style: dashed;
+    border-radius: 10px;
+ 
+}
+ 
+#quhua p {
+    /*区划段落*/
+    letter-spacing: 2px;
+    text-indent: 2em;
+    line-height: 1.5em;
+}
+ 
+#quhua img {
+    /*区划图片*/
+    width: 800px;
+    height: 400px;
+    margin: 5px 10px 0px 10px;
+    border-radius: 5px;
+ 
+}
+ 
+#quhua img:hover {
+    /*鼠标划过时的区划图片*/
+    transform: scale(1.2);
+}
+ 
+#renkou {
+    /*人口*/
+    clear: both;
+    background-color: rgb(255, 255, 255);
+    padding: 15px;
+    margin-top: 20px;
+    border-color: rgb(75, 99, 153);
+    border-style: dashed;
+    border-radius: 10px;
+ 
+}
+ 
+#renkou p {
+    /*人口段落*/
+    letter-spacing: 2px;
+    text-indent: 2em;
+    line-height: 1.5em;
+}
+ 
+.mulu {
+    /*页面目录*/
+    float: left;
+    /*左浮动*/
+    width: 300px;
+    margin-top: 30px;
+    background-color: rgb(201, 176, 162);
+}
+ 
+#d1 {
+    /*目录块大小设置*/
+    font-family: 黑体;
+    font-size: 100%;
+    /*字体大小*/
+    color: white;
+    float: left;
+    background-color: rgb(61, 58, 128);
+    width: 70px;
+    height: 20px;
+    padding: 5px 5px;
+    margin: 4px;
+}
+ 
+#d2 {
+    /*目录内容块设置*/
+    clear: both;
+}
+ 
+.mulu ul li {
+    /*列表设置*/
+    list-style-type: none;
+}
+ 
+.mulu ul {
+    /*目录块*/
+    margin: 0px;
+    padding: 15px 10px 15px 10px;
+}
+ 
+.mulu ul li a {
+    /*目录超链接设置*/
+    display: block;
+    text-decoration: none;
+    /*下划线无*/
+    color: rgb(79, 50, 72);
+    line-height: 30px;
+    /*行高*/
+    border-bottom: 1px dashed black;
+    /*底部边框*/
+    padding: 0px 0px 0px 0px;
+}
+ 
+.mulu ul li a:hover {
+    /*鼠标划过时目录时*/
+    color: aqua;
+}
+ 
+.mulu span {
+    /*目录链接块*/
+    float: right;
+}
+ 
+.zhuti {
+    /*主体*/
+    background-color: rgb(235, 225, 225);
+    margin: 0px 200px 0px 300px;
+}
+ 
+#ship {
+    /*视频设置*/
+    text-align: center;
+    margin-top: 30px;
+}
