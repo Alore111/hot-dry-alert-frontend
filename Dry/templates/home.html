@@ -256,6 +256,79 @@
                 })
             );
         });
+        
+        // 封装暴露性渲染函数
+        function showData(type, year, time) {
+            let myChart = echarts.init(document.getElementById('myecharts'));
+            myChart.clear();  // 清空图表，重新渲染图表
+            myChart.showLoading();
+            $.get('https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json', function (geoJson) {
+                myChart.hideLoading();
+                echarts.registerMap('China', geoJson); // 将注册地图的代码放在数据加载成功的回调函数中
+
+                // 发送 POST 请求获取数据
+                $.post(`https://hotdryalert.2ndtool.top//getSSPDataInfo?type=${type}&time=${time}&year=${year}`, function (responseData) {
+                    // 将后端返回的数据转换成前端需要的格式
+                    let formattedData = [];
+                    for (let province in responseData) {
+                        formattedData.push({ name: province, value: responseData[province] });
+                    }
+
+                    // 设置图表的数据和选项
+                    myChart.setOption({
+                        title: {
+                            text: '中国地图',
+                            subtext: 'Data from Wikipedia',
+                            sublink: ''
+                        },
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: '{b}<br/>{c} (p / km2)'
+                        },
+                        toolbox: {
+                            show: true,
+                            orient: 'vertical',
+                            left: 'right',
+                            top: 'center',
+                            feature: {
+                                dataView: { readOnly: false },
+                                restore: {},
+                                saveAsImage: {}
+                            }
+                        },
+                        visualMap: {
+                            min: 800,
+                            max: 50000,
+                            text: ['High', 'Low'],
+                            realtime: false,
+                            calculable: true,
+                            inRange: {
+                                color: ['lightskyblue', 'yellow', 'orangered']
+                            }
+                        },
+                        series: [
+                            {
+                                name: '中国地图',
+                                type: 'map',
+                                map: 'China',
+                                selectedMode: false,
+                                zoom: 1,
+                                roam: true,
+                                scaleLimit: {
+                                    min: 1,
+                                    max: 2
+                                },
+                                label: {
+                                    show: false
+                                },
+                                data: formattedData, // 使用转换后的数据
+                                nameMap: {}
+                            }
+                        ]
+                    });
+                });
+            });
+        }
 
 
     </script>
