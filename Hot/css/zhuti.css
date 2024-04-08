@@ -1,0 +1,119 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+.daohang{
+    height: 50px;
+    background-color: deepskyblue;
+    
+}
+.daohang div{
+    width: 400px;
+    text-align: center;
+    float: left;
+}
+.daohang div img{
+    width: 50px;
+    height: 50px;
+    float: left;
+}
+.daohang div p{
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+}
+.daohang div p a {
+    height: 50px;
+    text-align: center;/*文本位置*/
+    color: white;
+    font-weight: 3px;
+    font-size: 25px;/*字体大小*/
+    font-family: 楷体;
+    text-decoration: none;/*列表样式*/
+    display: block;
+    line-height: 50px;
+}
+.danghang div p a:hover{ /*鼠标滑过时 */
+    color: rgb(0, 0, 0);
+    background-color: rgb(179, 204, 241);
+}
+.cebian{
+    width: 350px;
+    height: 900px;
+    background-color: deepskyblue;
+    overflow: hidden;
+}
+.cebian ul{
+    width: 100%;
+    list-style-type: none;
+    line-height: 50px;
+    margin: 0;
+}
+.cebian ul li{
+    display: block;
+    width: 100%;
+    height: 60px;
+    text-align: center;
+    line-height: 50px;
+}
+.cebian ul li a{
+    height: 60px;
+    text-align: center;/*文本位置*/
+    font-weight: 2px;
+    font-size: 25px;/*字体大小*/
+    font-family: 楷体;
+    color:#0742e4;
+    text-decoration: none;/*列表样式*/
+    display: block;
+    line-height: 50px;
+}
+.cebian ul li a:hover{
+    color: rgb(31, 8, 233);
+    background-color: rgb(179, 204, 241);
+}
+.chaxun{
+    width: 450px;
+    height: 900px;
+    background-color:deepskyblue;
+    color: cornsilk;
+    margin-left: 2px;
+    overflow: hidden;
+    font-size: 20px;
+    font-weight: 2px;
+    font-family: 楷体;
+    text-align: center;
+}
+.chaxun div{
+    margin: 25px;
+}
+.chaxun p{
+    font-size: 25px;
+    font-weight: 2px;
+    font-family: 楷体;
+    color: #0742e4;
+}
+.biaodan{
+    width: 200px;
+    height: 20px;
+    font-size: 18px;
+    font-weight: 2px;
+    font-family: '黑体';
+    text-align: center;
+    color: rgb(18, 28, 73);
+
+}
+.zhanshi{
+    width: 100%;
+    height: 100%px;
+    background-color:rgb(174, 201, 236);
+    margin-left: 2px;
+    overflow: hidden;
+}
+
+
+.containter{
+    margin-top: 2px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
