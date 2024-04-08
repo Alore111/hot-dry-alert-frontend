@@ -15,154 +15,155 @@
 
 <body class="container">
 <div style="width: 100%; height: 100%; position: absolute; z-index: 99;">
-        <div class="nav">
-            <ul class="list">
-                <h2>干旱评估及决策系统</h2>
-                <li class="l1"><a href="home.html" style="font-size: 1.5em;">干旱</a></li>
-                <li class="l1"><a href="decision.html"><b>防范决策</b></a></li>
-                <li class="l2"><a href="login.html">登录</a></li>
-            </ul>
-        </div>
-        <div style="display: flex;flex-direction: row; gap:100px;margin-top: 10px">
-            <div style="display: flex;flex-direction: column">
-                <div>
-                    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
-                            data-bs-target="#offcanvasExample"
-                            aria-controls="offcanvasExample" style="box-shadow: 5px 5px 3px #818080">
-                        查询面板
-                    </button>
+    <div class="nav">
+        <ul class="list">
+            <h2>干旱评估及决策系统</h2>
+            <li class="l1"><a href="home.html" style="font-size: 1.5em;">干旱</a></li>
+            <li class="l1"><a href="decision.html"><b>防范决策</b></a></li>
+            <li class="l2"><a href="login.html">登录</a></li>
+        </ul>
+    </div>
+    <div style="display: flex;flex-direction: row; gap:100px;margin-top: 10px">
+        <div style="display: flex;flex-direction: column">
+            <div>
+                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasExample"
+                        aria-controls="offcanvasExample" style="box-shadow: 5px 5px 3px #818080">
+                    查询面板
+                </button>
 
-                    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
-                         aria-labelledby="offcanvasExampleLabel">
-                        <div class="offcanvas-header">
-                            <h5 class="offcanvas-title" id="offcanvasExampleLabel">查询面板</h5>
-                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                                    aria-label="Close"></button>
+                <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
+                     aria-labelledby="offcanvasExampleLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasExampleLabel">查询面板</h5>
+                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                                aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <div class="radio-input">
+                            <label>
+                                <input type="radio" id="value-1" name="value-radio" value="page1" checked="true">
+                                <span>危险性</span>
+                            </label>
+                            <label>
+                                <input type="radio" id="value-2" name="value-radio" value="page2">
+                                <span>暴露度</span>
+                            </label>
+                            <label>
+                                <input type="radio" id="value-3" name="value-radio" value="page3">
+                                <span>脆弱性</span>
+                            </label>
+                            <label>
+                                <input type="radio" id="value-4" name="value-radio" value="page4">
+                                <span>观测</span>
+                            </label>
+                            <span class="selection"></span>
                         </div>
-                        <div class="offcanvas-body">
-                            <div class="radio-input">
-                                <label>
-                                    <input type="radio" id="value-1" name="value-radio" value="page1" checked="true">
-                                    <span>危险性</span>
-                                </label>
-                                <label>
-                                    <input type="radio" id="value-2" name="value-radio" value="page2">
-                                    <span>暴露度</span>
-                                </label>
-                                <label>
-                                    <input type="radio" id="value-3" name="value-radio" value="page3">
-                                    <span>脆弱性</span>
-                                </label>
-                                <label>
-                                    <input type="radio" id="value-4" name="value-radio" value="page4">
-                                    <span>观测</span>
-                                </label>
-                                <span class="selection"></span>
-                            </div>
-                            <div id="page1" class="control-page" style="display: block">
-                                <!-- 页面1的内容 -->
-                                <form id="form1">
-                                    <h3>时效：</h3>
-                                    <div class="time-radio">
-                                        <label>
-                                            <input type="radio" value="his" name="time">his
-                                        </label>
-                                        <label>
-                                            <input type="radio" value="126" name="time">126
-                                        </label>
-                                        <label>
-                                            <input type="radio" value="245" name="time">245
-                                        </label>
-                                        <label>
-                                            <input type="radio" value="370" name="time">370
-                                        </label>
-                                        <label>
-                                            <input type="radio" value="585" name="time">585
-                                        </label>
-                                        <span class="time-selection"></span>
-                                    </div>
-                                    <div>
-                                        <h3>致灾因子：</h3>
-                                        <select id="indicators">
-                                            <option value="cumulative_drought">累计干旱量</option>
-                                            <option value="persistent_drought_index">持续干旱指数</option>
-                                            <option value="persistent_moisture_index">持续湿润指数</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <h3>时间：</h3>
-                                        <label>
-                                            <input type="text" value="" name="year" placeholder="year">
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <h3>气候模式：</h3>
-                                        <select id="models" name="models">
-                                            <option value="ACCESS-CM2">ACCESS-CM2</option>
-                                            <option value="bcc_cma">bcc_cma</option>
-                                            <option value="CN0.511">CN05.11</option>
-                                            <option value="cnrm6">cnrm6</option>
-                                            <option value="HadGEM3-GC31-LL">HadGEM3-GC31-LL</option>
-                                            <option value="INM-CM5-0">INM-CM5-0</option>
-                                            <option value="IPSL-CM6A-LR">IPSL-CM6A-LR</option>
-                                            <option value="MRI-ESM2-0">MRI-ESM2-0</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <input type="submit" value="确定">
-                                    </div>
-                                </form>
-                            </div>
-                            <div id="page2" class="control-page" style="display: none">
-                                <!-- 页面2的内容 -->
-                                <form id="form2">
-                                    <div>
-                                        <h3>数据类型</h3>
-                                        <select id="data-type" name="data-type">
-                                            <option value="population">人口</option>
-                                            <option value="GDP">GDP</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <h3>普查次数</h3>
-                                        <select id="census" name="census">
-                                            <option value="ssp1">ssp1</option>
-                                            <option value="ssp2">ssp2</option>
-                                            <option value="ssp3">ssp3</option>
-                                            <option value="ssp4">ssp4</option>
-                                            <option value="ssp5">ssp5</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <h3>时间：</h3>
-                                        <label>
-                                            <input type="text" value="" name="year" placeholder="year">
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <input type="submit" value="确定">
-                                    </div>
-                                </form>
-                            </div>
-                            <div id="page3" class="control-page" style="display: none">
-                                <!-- 页面3的内容 -->
-                                <form id="form3">
-                                    <div>
-                                        <h3>时间：</h3>
-                                        <label>
-                                            <input type="text" value="" name="year" placeholder="year">
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <input type="submit" value="确定">
-                                    </div>
-                                </form>
-                            </div>
-                            <div id="page4" class="control-page" style="display: none">
-                                <!-- 页面4的内容 -->
+                        <div id="page1" class="control-page" style="display: block">
+                            <!-- 页面1的内容 -->
+                            <form id="form1" method="post">
+                                <h3>时效：</h3>
+                                <div class="time-radio">
+                                    <label>
+                                        <input type="radio" value="his" name="time">his
+                                    </label>
+                                    <label>
+                                        <input type="radio" value="126" name="time">126
+                                    </label>
+                                    <label>
+                                        <input type="radio" value="245" name="time">245
+                                    </label>
+                                    <label>
+                                        <input type="radio" value="370" name="time">370
+                                    </label>
+                                    <label>
+                                        <input type="radio" value="585" name="time">585
+                                    </label>
+                                    <span class="time-selection"></span>
+                                </div>
                                 <div>
                                     <h3>致灾因子：</h3>
-                                    <select id="assessment">
+                                    <select id="indicators" name="indicators">
+                                        <option value="cumulative_drought">累计干旱量</option>
+                                        <option value="persistent_drought_index">持续干旱指数</option>
+                                        <option value="persistent_moisture_index">持续湿润指数</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <h3>时间：</h3>
+                                    <label>
+                                        <input type="text" value="" name="year" placeholder="year">
+                                    </label>
+                                </div>
+                                <div>
+                                    <h3>气候模式：</h3>
+                                    <select id="models" name="models">
+                                        <option value="ACCESS-CM2">ACCESS-CM2</option>
+                                        <option value="bcc_cma">bcc_cma</option>
+                                        <option value="CN0.511">CN05.11</option>
+                                        <option value="cnrm6">cnrm6</option>
+                                        <option value="HadGEM3-GC31-LL">HadGEM3-GC31-LL</option>
+                                        <option value="INM-CM5-0">INM-CM5-0</option>
+                                        <option value="IPSL-CM6A-LR">IPSL-CM6A-LR</option>
+                                        <option value="MRI-ESM2-0">MRI-ESM2-0</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <input type="submit" value="确定">
+                                </div>
+                            </form>
+                        </div>
+                        <div id="page2" class="control-page" style="display: none">
+                            <!-- 页面2的内容 -->
+                            <form id="form2">
+                                <div>
+                                    <h3>数据类型</h3>
+                                    <select id="data-type" name="data-type">
+                                        <option value="population">人口</option>
+                                        <option value="GDP">GDP</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <h3>普查次数</h3>
+                                    <select id="census" name="census">
+                                        <option value="ssp1">ssp1</option>
+                                        <option value="ssp2">ssp2</option>
+                                        <option value="ssp3">ssp3</option>
+                                        <option value="ssp4">ssp4</option>
+                                        <option value="ssp5">ssp5</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <h3>时间：</h3>
+                                    <label>
+                                        <input type="text" value="" name="year" placeholder="year">
+                                    </label>
+                                </div>
+                                <div>
+                                    <input type="submit" value="确定">
+                                </div>
+                            </form>
+                        </div>
+                        <div id="page3" class="control-page" style="display: none">
+                            <!-- 页面3的内容 -->
+                            <form id="form3">
+                                <div>
+                                    <h3>时间：</h3>
+                                    <label>
+                                        <input type="text" value="" name="year" placeholder="year">
+                                    </label>
+                                </div>
+                                <div>
+                                    <input type="submit" value="确定">
+                                </div>
+                            </form>
+                        </div>
+                        <div id="page4" class="control-page" style="display: none">
+                            <!-- 页面4的内容 -->
+                            <form>
+                                <div>
+                                    <h3>致灾因子：</h3>
+                                    <select id="assessment" name="assessment">
                                         <option value="risk_level">危险性等级</option>
                                         <option value="comprehensive_risk">综合风险</option>
                                     </select>
@@ -176,89 +177,90 @@
                                 <div>
                                     <input type="submit" value="确定">
                                 </div>
-                            </div>
-
+                            </form>
                         </div>
+
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div style="display:flex;justify-content: center;z-index: 90;box-shadow: 5px 5px #818080;">
-                <div id="myecharts"
-                     style="width: 80vw;height: 90vh;background-color: #ffffff;display:flex;align-items:center;justify-content: center;">
-                </div>
+        <div style="display:flex;justify-content: center;z-index: 90;box-shadow: 5px 5px #818080;">
+            <div id="myecharts"
+                 style="width: 80vw;height: 90vh;background-color: #ffffff;display:flex;align-items:center;justify-content: center;">
             </div>
         </div>
-        <script type="text/javascript" src="../static/js/control.js"></script>
-        <script type="text/javascript">
-
-            let myChart = echarts.init(document.getElementById('myecharts'));
-            myChart.clear();  // 清空图表，重新渲染图表
-            myChart.showLoading();
-            $.get('https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json', function (geoJson) {
-                myChart.hideLoading();
-                echarts.registerMap('China', geoJson);
-                myChart.setOption(
-                    (option = {
-                        title: {
-                            text: '中国地图',
-                            subtext: 'Data from Wikipedia',
-                            sublink:
-                                ''
-                        },
-                        tooltip: {
-                            trigger: 'item',
-                            formatter: '{b}<br/>{c} (p / km2)'
-                        },
-                        toolbox: {
-                            show: true,
-                            orient: 'vertical',
-                            left: 'right',
-                            top: 'center',
-                            feature: {
-                                dataView: {readOnly: false},
-                                restore: {},
-                                saveAsImage: {}
-                            }
-                        },
-                        visualMap: {//用于调整图标
-                            min: 800,
-                            max: 50000,
-                            text: ['High', 'Low'],
-                            realtime: false,
-                            calculable: true,
-                            inRange: {
-                                color: ['lightskyblue', 'yellow', 'orangered']
-                            }
-                        },
-                        series: [
-                            {
-                                name: '中国地图',
-                                type: 'map',
-                                map: 'China',
-                                selectedMode: false,//避免被选中区域显示黄色的问题
-                                zoom: 1, //当前视角的缩放比例
-                                roam: true, //是否开启平游或缩放
-                                scaleLimit: { //滚轮缩放的极限控制
-                                    min: 1,
-                                    max: 2
-                                },
-                                label: {
-                                    show: false
-                                },
-                                data: [],
-                                // 自定义名称映射
-                                nameMap: {}
-                            }
-                        ]
-                    })
-                );
-            });
-
-
-        </script>
-
     </div>
+    <script type="text/javascript" src="../static/js/control.js"></script>
+    <script type="text/javascript">
+
+        let myChart = echarts.init(document.getElementById('myecharts'));
+        myChart.clear();  // 清空图表，重新渲染图表
+        myChart.showLoading();
+        $.get('https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json', function (geoJson) {
+            myChart.hideLoading();
+            echarts.registerMap('China', geoJson);
+            myChart.setOption(
+                (option = {
+                    title: {
+                        text: '中国地图',
+                        subtext: 'Data from Wikipedia',
+                        sublink:
+                            ''
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: '{b}<br/>{c} (p / km2)'
+                    },
+                    toolbox: {
+                        show: true,
+                        orient: 'vertical',
+                        left: 'right',
+                        top: 'center',
+                        feature: {
+                            dataView: {readOnly: false},
+                            restore: {},
+                            saveAsImage: {}
+                        }
+                    },
+                    visualMap: {//用于调整图标
+                        min: 800,
+                        max: 50000,
+                        text: ['High', 'Low'],
+                        realtime: false,
+                        calculable: true,
+                        inRange: {
+                            color: ['lightskyblue', 'yellow', 'orangered']
+                        }
+                    },
+                    series: [
+                        {
+                            name: '中国地图',
+                            type: 'map',
+                            map: 'China',
+                            selectedMode: false,//避免被选中区域显示黄色的问题
+                            zoom: 1, //当前视角的缩放比例
+                            roam: true, //是否开启平游或缩放
+                            scaleLimit: { //滚轮缩放的极限控制
+                                min: 1,
+                                max: 2
+                            },
+                            label: {
+                                show: false
+                            },
+                            data: [],
+                            // 自定义名称映射
+                            nameMap: {}
+                        }
+                    ]
+                })
+            );
+        });
+
+
+    </script>
+
+</div>
 
 </body>
 </html>
