@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,19 +8,21 @@
     <link rel="stylesheet" href="css/zhuti.css">
     <!-- <link rel="stylesheet" href="css/ht.css"> -->
     <!-- 载入bootstrap的css -->
-    <link href="static\bootstrap-5.3.0-alpha1-dist\css\bootstrap.min.css" rel="stylesheet"/>
+    <link href="static\bootstrap-5.3.0-alpha1-dist\css\bootstrap.min.css" rel="stylesheet" />
     <!-- 若使用bootstrap的js插件，则必须先导入jquery(因为bootstrap是依赖于jquery的) -->
-    <script src="static\jquery-3.5.1\jquery-3.5.1.js"></script>
+    <script src="js/jquery-3.7.1.js"></script>
+    <script src="js/echarts.min.js"></script>
     <!-- 载入bootstrap的js：包括所有的bootstrap的js插件或者可以根据需要使用的js插件的调用 -->
     <script src="static\bootstrap-5.3.0-alpha1-dist\js\bootstrap.min.js"></script>
 
 </head>
+
 <body>
     <div class="daohang">
         <div>
             <img src="phto/logo.png" alt="logo">
             <p>
-               <a href="zhuye.html">高温服务平台</a> 
+                <a href="zhuye.html">高温服务平台</a>
             </p>
         </div>
 
@@ -39,65 +42,167 @@
 
     <div class="containter">
         <div class="cebian">
-        <ul>
-            <li> 
-                <a href="zhuye.html">致灾因子危险性</a>
-            </li>
+            <ul>
+                <li>
+                    <a href="zhuye.html">致灾因子危险性</a>
+                </li>
 
-            <li> 
-                <a href="baolu.html">暴露度</a>
-            </li>
+                <li>
+                    <a href="baolu.html">暴露度</a>
+                </li>
 
-            <li> 
-                <a href="cuiruo.html">脆弱性</a>
-            </li>
+                <li>
+                    <a href="cuiruo.html">脆弱性</a>
+                </li>
 
-        </ul>
-    </div>
+            </ul>
+        </div>
 
-    <div class="chaxun">
-        <p>
-            查询面板
-        </p>
-
-        <div>
+        <div class="chaxun">
             <p>
-             数据类型：
+                查询面板
             </p>
-            <select class="biaodan">
-                <option value="people" selected>人口</option>
-                <option value="gdp">GDP</option>
-            </select>
+
+            <div>
+                <p>
+                    数据类型：
+                </p>
+                <select class="biaodan" id="exposure-type">
+                    <option value="people" selected>人口</option>
+                    <option value="gdp">GDP</option>
+                </select>
+            </div>
+
+            <div>
+                <p>
+                    普查次数：
+                </p>
+                <select class="biaodan" id="exposure-time">
+                    <option value="1">ssp1</option>
+                    <option value="2">ssp2</option>
+                    <option value="3">ssp3</option>
+                    <option value="4">ssp4</option>
+                    <option value="5">ssp5</option>
+                </select>
+            </div>
+
+            <div>
+                <p>时间：</p>
+                <label>
+                    <input type="text" value="2022" name="year" id="exposure-year" placeholder="year" class="biaodan">
+                </label>
+            </div>
+
+            <!-- 添加确定按钮 -->
+            <button id="confirm-button">确定</button>
         </div>
 
-        <div>
-            <p>
-             普查次数：
-            </p>
-            <select class="biaodan">
-                <option value="ssp1">ssp1</option>
-                <option value="ssp2">ssp2</option>
-                <option value="ssp3">ssp3</option>
-                <option value="ssp4">ssp4</option>
-                <option value="ssp5">ssp5</option>
-            </select>
+        <div class="zhanshi">
+            <div style="display:flex;justify-content: center;z-index: 90;box-shadow: 5px 5px #818080;">
+                <div id="myecharts"
+                    style="width: 80vw;height: 90vh;background-color: #ffffff;display:flex;align-items:center;justify-content: center;">
+                </div>
+            </div>
         </div>
-
-        <div>
-            <p>时间：</p>
-            <label>
-                <input type="text" value="" name="year" placeholder="year" class="biaodan 
-                ">
-            </label>
-        </div>
-       
-        
-
     </div>
 
-    <div class="zhanshi">
-    </div>
-    </div>
-    
 </body>
+
+<script>
+    // 封装暴露性渲染函数
+    function showExposureData(type, year, time) {
+        let myChart = echarts.init(document.getElementById('myecharts'));
+        myChart.clear();  // 清空图表，重新渲染图表
+        myChart.showLoading();
+        $.get('https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json', function (geoJson) {
+            myChart.hideLoading();
+            echarts.registerMap('China', geoJson); // 将注册地图的代码放在数据加载成功的回调函数中
+
+            // 发送 POST 请求获取数据
+            $.post(`https://hotdryalert.2ndtool.top//getSSPDataInfo?type=${type}&time=${time}&year=${year}`, function (responseData) {
+                // 将后端返回的数据转换成前端需要的格式
+                let formattedData = [];
+                let values = []; // 用于存储数据值，以计算最大和最小值
+                for (let province in responseData) {
+                    let value = responseData[province];
+                    formattedData.push({ name: province, value: value });
+                    values.push(value);
+                }
+
+                // 计算最大和最小值
+                let max = Math.max(...values);
+                let min = Math.min(...values);
+
+                // 设置图表的数据和选项
+                myChart.setOption({
+                    title: {
+                        text: '暴露度',
+                        subtext: 'Data from Wikipedia',
+                        sublink: ''
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: '{b}<br/>{c} (p / km2)'
+                    },
+                    toolbox: {
+                        show: true,
+                        orient: 'vertical',
+                        left: 'right',
+                        top: 'center',
+                        feature: {
+                            dataView: { readOnly: true },
+                            restore: {},
+                            saveAsImage: {}
+                        }
+                    },
+                    visualMap: {
+                        min: min, // 使用计算的最小值
+                        max: max, // 使用计算的最大值
+                        text: ['High', 'Low'],
+                        realtime: false,
+                        calculable: true,
+                        inRange: {
+                            color: ['lightskyblue', 'yellow', 'orangered']
+                        }
+                    },
+                    series: [
+                        {
+                            name: '中国地图',
+                            type: 'map',
+                            map: 'China',
+                            selectedMode: false,
+                            zoom: 1,
+                            roam: true,
+                            scaleLimit: {
+                                min: 1,
+                                max: 2
+                            },
+                            label: {
+                                show: false
+                            },
+                            data: formattedData, // 使用转换后的数据
+                            nameMap: {}
+                        }
+                    ]
+                });
+            });
+        });
+    }
+
+
+    // 获取确定按钮
+    var confirmButton = document.getElementById('confirm-button');
+
+    // 添加点击事件监听器
+    confirmButton.addEventListener('click', function () {
+        // 获取选择的数据类型、普查次数和时间
+        var type = document.getElementById('exposure-type').value;
+        var time = document.getElementById('exposure-time').value;
+        var year = document.getElementById('exposure-year').value;
+
+        // 调用showExposureData函数
+        showExposureData(type, year, time);
+    });
+</script>
+
 </html>
