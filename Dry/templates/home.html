@@ -64,27 +64,27 @@
                                 <!-- 页面1的内容 -->
                                 <form id="form1" method="post">
                                     <h3>时效：</h3>
-                                    <div class="time-radio">
+                                    <div class="time-radio" id="time">
                                         <label>
-                                            <input type="radio" value="his" name="time">his
+                                            <input type="radio" value="his" name="form1_time" checked="checked">his
                                         </label>
                                         <label>
-                                            <input type="radio" value="126" name="time">126
+                                            <input type="radio" value="126" name="form1_time">126
                                         </label>
                                         <label>
-                                            <input type="radio" value="245" name="time">245
+                                            <input type="radio" value="245" name="form1_time">245
                                         </label>
                                         <label>
-                                            <input type="radio" value="370" name="time">370
+                                            <input type="radio" value="370" name="form1_time">370
                                         </label>
                                         <label>
-                                            <input type="radio" value="585" name="time">585
+                                            <input type="radio" value="585" name="form1_time">585
                                         </label>
                                         <span class="time-selection"></span>
                                     </div>
                                     <div>
                                         <h3>致灾因子：</h3>
-                                        <select id="indicators" name="indicators">
+                                        <select id="form1_indicators" name="indicators">
                                             <option value="cumulative_drought">累计干旱量</option>
                                             <option value="persistent_drought_index">持续干旱指数</option>
                                             <option value="persistent_moisture_index">持续湿润指数</option>
@@ -93,7 +93,7 @@
                                     <div>
                                         <h3>时间：</h3>
                                         <label>
-                                            <input type="text" value="" name="year" placeholder="year">
+                                            <input type="text" value="" id="form1_year" name="year" placeholder="year" >
                                         </label>
                                     </div>
                                     <div>
@@ -152,7 +152,7 @@
                                     <div>
                                         <h3>时间：</h3>
                                         <label>
-                                            <input type="text" value="" name="year" placeholder="year">
+                                            <input type="text" value="" id="form3_year" name="year" placeholder="year">
                                         </label>
                                     </div>
                                     <div>
@@ -162,7 +162,7 @@
                             </div>
                             <div id="page4" class="control-page" style="display: none">
                                 <!-- 页面4的内容 -->
-                                <form>
+                                <form id="form4">
                                     <div>
                                         <h3>致灾因子：</h3>
                                         <select id="assessment" name="assessment">
@@ -173,7 +173,7 @@
                                     <div>
                                         <h3>时间：</h3>
                                         <label>
-                                            <input type="text" value="" name="year" placeholder="year">
+                                            <input type="text" value="" id="form4_year" name="year" placeholder="year">
                                         </label>
                                     </div>
                                     <div>
@@ -186,10 +186,14 @@
                     </div>
                 </div>
             </div>
-
-            <div style="display:flex;justify-content: center;z-index: 90;box-shadow: 5px 5px #818080;">
+            <div style="width: 80vw;height: 90vh;display:flex;justify-content: center;z-index: 90;box-shadow: 5px 5px #818080;">
+                <!--放地图-->
                 <div id="myecharts"
                     style="width: 80vw;height: 90vh;background-color: #ffffff;display:flex;align-items:center;justify-content: center;">
+                </div>
+                <!-- 放图片-->
+                <div id="image" style="width: 100%; height: 100%;display: none;background-color: #ffffff">
+                    <img src="" alt="map" style="width: 100%; height: 100%;object-fit: cover;"/>
                 </div>
             </div>
         </div>
@@ -199,6 +203,8 @@
             $(document).ready(function () {
                 // 为确定按钮添加点击事件监听器
                 $('#exposureSubmit').click(function () {
+                    document.getElementById('myecharts').style.display='flex';
+                    document.getElementById('image').style.display='none';
                     // 获取表单数据
                     let dataType = $('#exposure-type').val();
                     let time = $('#exposure-time').val();
@@ -213,70 +219,105 @@
                 });
             });
 
-
-
-            let myChart = echarts.init(document.getElementById('myecharts'));
-            myChart.clear();  // 清空图表，重新渲染图表
-            myChart.showLoading();
-            $.get('https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json', function (geoJson) {
-                myChart.hideLoading();
-                echarts.registerMap('China', geoJson);
-                myChart.setOption(
-                    (option = {
-                        title: {
-                            text: '中国地图',
-                            subtext: 'Data from Wikipedia',
-                            sublink:
-                                ''
-                        },
-                        tooltip: {
-                            trigger: 'item',
-                            formatter: '{b}<br/>{c} (p / km2)'
-                        },
-                        toolbox: {
-                            show: true,
-                            orient: 'vertical',
-                            left: 'right',
-                            top: 'center',
-                            feature: {
-                                dataView: { readOnly: false },
-                                restore: {},
-                                saveAsImage: {}
-                            }
-                        },
-                        visualMap: {//用于调整图标
-                            min: 800,
-                            max: 50000,
-                            text: ['High', 'Low'],
-                            realtime: false,
-                            calculable: true,
-                            inRange: {
-                                color: ['lightskyblue', 'yellow', 'orangered']
-                            }
-                        },
-                        series: [
-                            {
-                                name: '中国地图',
-                                type: 'map',
-                                map: 'China',
-                                selectedMode: false,//避免被选中区域显示黄色的问题
-                                zoom: 1, //当前视角的缩放比例
-                                roam: true, //是否开启平游或缩放
-                                scaleLimit: { //滚轮缩放的极限控制
-                                    min: 1,
-                                    max: 2
-                                },
-                                label: {
-                                    show: false
-                                },
-                                data: [],
-                                // 自定义名称映射
-                                nameMap: {}
-                            }
-                        ]
-                    })
-                );
+            //用于显示危险性，脆弱性，观测的内容
+            document.querySelectorAll('form').forEach(form => {
+                form.addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    // 获取提交的表单ID或类名
+                    const formId = this.getAttribute('id');
+                    // 根据表单ID或类名显示对应的内容，form1,3,4为图片
+                    if (formId === 'form1' ||formId === 'form3' ||formId === 'form4'){
+                        document.getElementById('myecharts').style.display='none';
+                        document.getElementById('image').style.display='block';
+                    }else {
+                        document.getElementById('myecharts').style.display='flex';
+                        document.getElementById('image').style.display='none';
+                    }
+                    // 将表单的内容输出到控制台
+                    if (formId === 'form1'){
+                        let time = $("input[name='form1_time']:checked").val();
+                        let indicators = $('#form1_indicators').val();
+                        let year = $('#form1_year').val();
+                        let models = $('#models').val();
+                        console.log('时效:', time);
+                        console.log('致灾因子:', indicators);
+                        console.log('时间:', year);
+                        console.log('气候模式:', models);
+                    }else if(formId === 'form3'){
+                        let year = $('#form3_year').val();
+                        console.log('时间:', year);
+                    }else if(formId === 'form4'){
+                        let assessment = $('#assessment').val();
+                        let year = $('#form4_year').val();
+                        console.log('致灾因子:', assessment);
+                        console.log('时间:', year);
+                    }
+                });
             });
+
+
+            // let myChart = echarts.init(document.getElementById('myecharts'));
+            // myChart.clear();  // 清空图表，重新渲染图表
+            // myChart.showLoading();
+            // $.get('https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json', function (geoJson) {
+            //     myChart.hideLoading();
+            //     echarts.registerMap('China', geoJson);
+            //     myChart.setOption(
+            //         (option = {
+            //             title: {
+            //                 text: '中国地图',
+            //                 subtext: 'Data from Wikipedia',
+            //                 sublink:
+            //                     ''
+            //             },
+            //             tooltip: {
+            //                 trigger: 'item',
+            //                 formatter: '{b}<br/>{c} (p / km2)'
+            //             },
+            //             toolbox: {
+            //                 show: true,
+            //                 orient: 'vertical',
+            //                 left: 'right',
+            //                 top: 'center',
+            //                 feature: {
+            //                     dataView: { readOnly: false },
+            //                     restore: {},
+            //                     saveAsImage: {}
+            //                 }
+            //             },
+            //             visualMap: {//用于调整图标
+            //                 min: 800,
+            //                 max: 50000,
+            //                 text: ['High', 'Low'],
+            //                 realtime: false,
+            //                 calculable: true,
+            //                 inRange: {
+            //                     color: ['lightskyblue', 'yellow', 'orangered']
+            //                 }
+            //             },
+            //             series: [
+            //                 {
+            //                     name: '中国地图',
+            //                     type: 'map',
+            //                     map: 'China',
+            //                     selectedMode: false,//避免被选中区域显示黄色的问题
+            //                     zoom: 1, //当前视角的缩放比例
+            //                     roam: true, //是否开启平游或缩放
+            //                     scaleLimit: { //滚轮缩放的极限控制
+            //                         min: 1,
+            //                         max: 2
+            //                     },
+            //                     label: {
+            //                         show: false
+            //                     },
+            //                     data: [],
+            //                     // 自定义名称映射
+            //                     nameMap: {}
+            //                 }
+            //             ]
+            //         })
+            //     );
+            // });
 
             // 封装暴露性渲染函数
             function showExposureData(type, year, time) {
