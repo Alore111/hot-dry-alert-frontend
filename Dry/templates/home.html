@@ -9,401 +9,389 @@
     <link rel="stylesheet" type="text/css" href="../static/css/nav.css">
     <link rel="stylesheet" type="text/css" href="../static/css/control.css">
     <link rel="stylesheet" type="text/css" href="../static/css/background.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/loader.css">
     <script src="../static/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
     <script src="../static/echarts_dist/echarts.min.js"></script>
     <script src="../static/js/jquery-3.7.1.js"></script>
 </head>
 
 <body class="container">
-    <div style="width: 100%; height: 100%; position: absolute; z-index: 99;">
-        <div class="nav">
-            <ul class="list">
-                <h2>干旱评估及决策系统</h2>
-                <li class="l1"><a href="home.html" style="font-size: 1.5em;">干旱</a></li>
-                <li class="l1"><a href="decision.html"><b>防范决策</b></a></li>
-                <li class="l2"><a href="login.html">登录</a></li>
-            </ul>
-        </div>
-        <div style="display: flex;flex-direction: row; gap:100px;margin-top: 10px">
-            <div style="display: flex;flex-direction: column">
-                <div>
-                    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
+<div class="loader" id="loader">
+    <div class="justify-content-center jimu-primary-loading">
+    </div>
+</div>
+<div style="width: 100%; height: 100%; position: absolute; z-index: 95;">
+    <div class="nav">
+        <ul class="list">
+            <h2>干旱评估及决策系统</h2>
+            <li class="l1"><a href="home.html" style="font-size: 1.5em;">干旱</a></li>
+            <li class="l1"><a href="decision.html"><b>防范决策</b></a></li>
+            <li class="l2"><a href="login.html">登录</a></li>
+        </ul>
+    </div>
+    <div style="display: flex;flex-direction: row; gap:100px;margin-top: 10px">
+        <div style="display: flex;flex-direction: column">
+            <div>
+                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"
                         style="box-shadow: 5px 5px 3px #818080">
-                        查询面板
-                    </button>
+                    查询面板
+                </button>
 
-                    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
-                        aria-labelledby="offcanvasExampleLabel">
-                        <div class="offcanvas-header">
-                            <h5 class="offcanvas-title" id="offcanvasExampleLabel">查询面板</h5>
-                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
+                     aria-labelledby="offcanvasExampleLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasExampleLabel">查询面板</h5>
+                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                                 aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <div class="radio-input">
+                            <label>
+                                <input type="radio" id="value-1" name="value-radio" value="page1" checked="true">
+                                <span>危险性</span>
+                            </label>
+                            <label>
+                                <input type="radio" id="value-2" name="value-radio" value="page2">
+                                <span>暴露度</span>
+                            </label>
+                            <!--                                <label>-->
+                            <!--                                    <input type="radio" id="value-3" name="value-radio" value="page3">-->
+                            <!--                                    <span>脆弱性</span>-->
+                            <!--                                </label>-->
+                            <label>
+                                <input type="radio" id="value-4" name="value-radio" value="page4">
+                                <span>观测</span>
+                            </label>
+                            <span class="selection"></span>
                         </div>
-                        <div class="offcanvas-body">
-                            <div class="radio-input">
-                                <label>
-                                    <input type="radio" id="value-1" name="value-radio" value="page1" checked="true">
-                                    <span>危险性</span>
-                                </label>
-                                <label>
-                                    <input type="radio" id="value-2" name="value-radio" value="page2">
-                                    <span>暴露度</span>
-                                </label>
-                                <label>
-                                    <input type="radio" id="value-3" name="value-radio" value="page3">
-                                    <span>脆弱性</span>
-                                </label>
-                                <label>
-                                    <input type="radio" id="value-4" name="value-radio" value="page4">
-                                    <span>观测</span>
-                                </label>
-                                <span class="selection"></span>
-                            </div>
-                            <div id="page1" class="control-page" style="display: block">
-                                <!-- 页面1的内容 -->
-                                <form id="form1" method="post">
-                                    <h3>时效：</h3>
-                                    <div class="time-radio" id="time">
-                                        <label>
-                                            <input type="radio" value="his" name="form1_time" checked="checked">his
-                                        </label>
-                                        <label>
-                                            <input type="radio" value="126" name="form1_time">126
-                                        </label>
-                                        <label>
-                                            <input type="radio" value="245" name="form1_time">245
-                                        </label>
-                                        <label>
-                                            <input type="radio" value="370" name="form1_time">370
-                                        </label>
-                                        <label>
-                                            <input type="radio" value="585" name="form1_time">585
-                                        </label>
-                                        <span class="time-selection"></span>
-                                    </div>
-                                    <div>
-                                        <h3>致灾因子：</h3>
-                                        <select id="form1_indicators" name="indicators">
-                                            <option value="cumulative_drought">累计干旱量</option>
-                                            <option value="persistent_drought_index">持续干旱指数</option>
-                                            <option value="persistent_moisture_index">持续湿润指数</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <h3>时间：</h3>
-                                        <label>
-                                            <input type="text" value="" id="form1_year" name="year" placeholder="year" >
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <h3>气候模式：</h3>
-                                        <select id="models" name="models">
-                                            <option value="ACCESS-CM2">ACCESS-CM2</option>
-                                            <option value="bcc_cma">bcc_cma</option>
-                                            <option value="CN0.511">CN05.11</option>
-                                            <option value="cnrm6">cnrm6</option>
-                                            <option value="HadGEM3-GC31-LL">HadGEM3-GC31-LL</option>
-                                            <option value="INM-CM5-0">INM-CM5-0</option>
-                                            <option value="IPSL-CM6A-LR">IPSL-CM6A-LR</option>
-                                            <option value="MRI-ESM2-0">MRI-ESM2-0</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <input type="submit" value="确定">
-                                    </div>
-                                </form>
-                            </div>
-                            <div id="page2" class="control-page" style="display: none">
-                                <!-- 页面2的内容 -->
-                                <form id="exposureForm">
-                                    <div>
-                                        <h3>数据类型</h3>
-                                        <select id="exposure-type" name="exposure-type">
-                                            <option value="people">人口</option>
-                                            <option value="gdp">GDP</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <h3>普查次数</h3>
-                                        <select id="exposure-time" name="exposure-time">
-                                            <option value="1">ssp1</option>
-                                            <option value="2">ssp2</option>
-                                            <option value="3">ssp3</option>
-                                            <option value="4">ssp4</option>
-                                            <option value="5">ssp5</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <h3>时间：</h3>
-                                        <label>
-                                            <input type="text" value="" id="exposure-year" name="year"
-                                                placeholder="year">
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <input type="button" id="exposureSubmit" value="确定">
-                                    </div>
-                                </form>
-                            </div>
-                            <div id="page3" class="control-page" style="display: none">
-                                <!-- 页面3的内容 -->
-                                <form id="form3">
-                                    <div>
-                                        <h3>时间：</h3>
-                                        <label>
-                                            <input type="text" value="" id="form3_year" name="year" placeholder="year">
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <input type="submit" value="确定">
-                                    </div>
-                                </form>
-                            </div>
-                            <div id="page4" class="control-page" style="display: none">
-                                <!-- 页面4的内容 -->
-                                <form id="form4">
-                                    <div>
-                                        <h3>致灾因子：</h3>
-                                        <select id="assessment" name="assessment">
-                                            <option value="risk_level">危险性等级</option>
-                                            <option value="comprehensive_risk">综合风险</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <h3>时间：</h3>
-                                        <label>
-                                            <input type="text" value="" id="form4_year" name="year" placeholder="year">
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <input type="submit" value="确定">
-                                    </div>
-                                </form>
-                            </div>
+                        <div id="page1" class="control-page" style="display: block">
+                            <!-- 页面1的内容 -->
+                            <form id="form1" method="post">
+                                <input type="hidden" value="ganhan" id="type_hot">
+                                <h3>时效：</h3>
+                                <div class="time-radio" id="time">
+                                    <label>
+                                        <input type="radio" value="his" name="form1_time" checked="checked">his
+                                    </label>
+                                    <label>
+                                        <input type="radio" value="126" name="form1_time">126
+                                    </label>
+                                    <label>
+                                        <input type="radio" value="245" name="form1_time">245
+                                    </label>
+                                    <label>
+                                        <input type="radio" value="370" name="form1_time">370
+                                    </label>
+                                    <label>
+                                        <input type="radio" value="585" name="form1_time">585
+                                    </label>
+                                    <span class="time-selection"></span>
+                                </div>
+                                <div>
+                                    <h3>致灾因子：</h3>
+                                    <select id="form1_indicators" name="indicators">
+                                        <option value="leijiganhanliang">累计干旱量</option>
+                                        <option value="jiduanganhanrishu">极端干旱日数</option>
+                                        <option value="CDD">持续干旱指数</option>
+                                        <option value="CWD">持续湿润指数</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <h3>时间：</h3>
+                                    <label>
+                                        <input type="text" value="2014" id="form1_year" name="year" placeholder="year">
+                                    </label>
+                                </div>
+                                <div>
+                                    <h3>气候模式：</h3>
+                                    <select id="models" name="models">
+                                        <option value="ACCESS-CM2">ACCESS-CM2</option>
+                                        <option value="bcc_cma">bcc_cma</option>
+                                        <option value="CN0.511">CN05.11</option>
+                                        <option value="cnrm6">cnrm6</option>
+                                        <option value="HadGEM3-GC31-LL">HadGEM3-GC31-LL</option>
+                                        <option value="INM-CM5-0">INM-CM5-0</option>
+                                        <option value="IPSL-CM6A-LR">IPSL-CM6A-LR</option>
+                                        <option value="MRI-ESM2-0">MRI-ESM2-0</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <input type="submit" value="确定">
+                                </div>
+                            </form>
+                        </div>
+                        <div id="page2" class="control-page" style="display: none">
+                            <!-- 页面2的内容 -->
+                            <form id="exposureForm">
+                                <div>
+                                    <h3>数据类型</h3>
+                                    <select id="exposure-type" name="exposure-type">
+                                        <option value="people">人口</option>
+                                        <option value="gdp">GDP</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <h3>普查次数</h3>
+                                    <select id="exposure-time" name="exposure-time">
+                                        <option value="1">ssp1</option>
+                                        <option value="2">ssp2</option>
+                                        <option value="3">ssp3</option>
+                                        <option value="4">ssp4</option>
+                                        <option value="5">ssp5</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <h3>时间：</h3>
+                                    <label>
+                                        <input type="text" value="" id="exposure-year" name="year"
+                                               placeholder="year">
+                                    </label>
+                                </div>
+                                <div>
+                                    <input type="button" id="exposureSubmit" value="确定">
+                                </div>
+                            </form>
+                        </div>
+                        <!--                            <div id="page3" class="control-page" style="display: none">-->
+                        <!--                                &lt;!&ndash; 页面3的内容 &ndash;&gt;-->
+                        <!--                                <form id="form3">-->
+                        <!--                                    <div>-->
+                        <!--                                        <h3>时间：</h3>-->
+                        <!--                                        <label>-->
+                        <!--                                            <input type="text" value="" id="form3_year" name="year" placeholder="year">-->
+                        <!--                                        </label>-->
+                        <!--                                    </div>-->
+                        <!--                                    <div>-->
+                        <!--                                        <input type="submit" value="确定">-->
+                        <!--                                    </div>-->
+                        <!--                                </form>-->
+                        <!--                            </div>-->
+                        <div id="page4" class="control-page" style="display: none">
+                            <!-- 页面4的内容 -->
+                            <form id="form4">
+                                <input type="hidden" value="ganhan" id="f4_type_hot">
+                                <input type="hidden" value="guance" id="form4_ageing">
+                                <div>
+                                    <h3>致灾因子：</h3>
+                                    <select id="assessment" name="assessment">
+                                        <option value="weixianxing">危险性等级</option>
+                                        <option value="zonghefengxian">综合风险</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <h3>时间：</h3>
+                                    <label>
+                                        <input type="text" value="2018" id="form4_year" name="year" placeholder="year">
+                                    </label>
+                                </div>
+                                <div>
+                                    <input type="submit" value="确定">
+                                </div>
+                            </form>
+                        </div>
 
-                        </div>
                     </div>
                 </div>
             </div>
-            <div style="width: 80vw;height: 90vh;display:flex;justify-content: center;z-index: 90;box-shadow: 5px 5px #818080;">
-                <!--放地图-->
-                <div id="myecharts"
-                    style="width: 80vw;height: 90vh;background-color: #ffffff;display:flex;align-items:center;justify-content: center;">
-                </div>
-                <!-- 放图片-->
-                <div id="image" style="width: 100%; height: 100%;display: none;background-color: #ffffff">
-                    <img src="" alt="map" style="width: 100%; height: 100%;object-fit: cover;"/>
-                </div>
+        </div>
+        <div style="width: 80vw;height: 90vh;display:flex;justify-content: center;z-index: 90;box-shadow: 5px 5px #818080;">
+            <!--放地图-->
+            <div id="myecharts"
+                 style="width: 80vw;height: 90vh;background-color: #ffffff;display:flex;align-items:center;justify-content: center;">
+            </div>
+            <!-- 放图片-->
+            <div id="image" style="width: 100%; height: 100%;display: none;background-color: #ffffff">
+                <img src="" alt="map" style="width: 100%; height: 100%;object-fit: cover;"/>
             </div>
         </div>
-        <script type="text/javascript" src="../static/js/control.js"></script>
-        <script type="text/javascript">
+    </div>
+    <script type="text/javascript" src="../static/js/control.js"></script>
+    <script type="text/javascript">
 
-            $(document).ready(function () {
-                // 为确定按钮添加点击事件监听器
-                $('#exposureSubmit').click(function () {
-                    document.getElementById('myecharts').style.display='flex';
-                    document.getElementById('image').style.display='none';
-                    // 获取表单数据
-                    let dataType = $('#exposure-type').val();
-                    let time = $('#exposure-time').val();
-                    let year = $('#exposure-year').val();
+        $(document).ready(function () {
+            // 为确定按钮添加点击事件监听器
+            $('#exposureSubmit').click(function () {
+                document.getElementById('myecharts').style.display = 'flex';
+                document.getElementById('image').style.display = 'none';
+                // 获取表单数据
+                let dataType = $('#exposure-type').val();
+                let time = $('#exposure-time').val();
+                let year = $('#exposure-year').val();
 
-                    // 在这里执行您需要的操作，比如发送数据给后端并更新页面等
-                    // 这里只是打印表单数据，您可以根据需要进行修改
-                    console.log('数据类型:', dataType);
-                    console.log('普查次数:', time);
+                // 在这里执行您需要的操作，比如发送数据给后端并更新页面等
+                // 这里只是打印表单数据，您可以根据需要进行修改
+                console.log('数据类型:', dataType);
+                console.log('普查次数:', time);
+                console.log('时间:', year);
+                showExposureData(dataType, year, time);
+            });
+        });
+
+        //用于显示危险性，脆弱性，观测的内容
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+                // 获取提交的表单ID或类名
+                const formId = this.getAttribute('id');
+                // 根据表单ID或类名显示对应的内容，form1,3,4为图片
+                if (formId === 'form1' || formId === 'form3' || formId === 'form4') {
+                    document.getElementById('myecharts').style.display = 'none';
+                    document.getElementById('image').style.display = 'block';
+                } else {
+                    document.getElementById('myecharts').style.display = 'flex';
+                    document.getElementById('image').style.display = 'none';
+                }
+                // 将表单的内容输出到控制台
+                if (formId === 'form1') {
+                    let type = $('#type_hot').val();
+                    let ageing = $("input[name='form1_time']:checked").val();
+                    let causing_factor = $('#form1_indicators').val();
+                    let data_year = $('#form1_year').val();
+                    let weather_mod = $('#models').val();
+                    console.log('类型:', type);
+                    console.log('时效:', ageing);
+                    console.log('致灾因子:', causing_factor);
+                    console.log('时间:', data_year);
+                    console.log('气候模式:', weather_mod);
+                    fetchImageData(type, ageing, causing_factor, weather_mod, data_year)
+                } else if (formId === 'form3') {
+                    let year = $('#form3_year').val();
                     console.log('时间:', year);
-                    showExposureData(dataType, year, time);
-                });
+                } else if (formId === 'form4') {
+                    let type = $('#f4_type_hot').val();
+                    let ageing = $('#form4_ageing').val();
+                    let causing_factor = $('#assessment').val();
+                    let data_year = $('#form4_year').val();
+                    console.log('类型：',type);
+                    console.log('观测:', ageing);
+                    console.log('致灾因子:', causing_factor);
+                    console.log('时间:', data_year);
+                    fetchImageData(type, ageing, causing_factor, '', data_year);
+                }
             });
+        });
 
-            //用于显示危险性，脆弱性，观测的内容
-            document.querySelectorAll('form').forEach(form => {
-                form.addEventListener('submit', function(event) {
-                    event.preventDefault();
-                    // 获取提交的表单ID或类名
-                    const formId = this.getAttribute('id');
-                    // 根据表单ID或类名显示对应的内容，form1,3,4为图片
-                    if (formId === 'form1' ||formId === 'form3' ||formId === 'form4'){
-                        document.getElementById('myecharts').style.display='none';
-                        document.getElementById('image').style.display='block';
-                    }else {
-                        document.getElementById('myecharts').style.display='flex';
-                        document.getElementById('image').style.display='none';
-                    }
-                    // 将表单的内容输出到控制台
-                    if (formId === 'form1'){
-                        let time = $("input[name='form1_time']:checked").val();
-                        let indicators = $('#form1_indicators').val();
-                        let year = $('#form1_year').val();
-                        let models = $('#models').val();
-                        console.log('时效:', time);
-                        console.log('致灾因子:', indicators);
-                        console.log('时间:', year);
-                        console.log('气候模式:', models);
-                    }else if(formId === 'form3'){
-                        let year = $('#form3_year').val();
-                        console.log('时间:', year);
-                    }else if(formId === 'form4'){
-                        let assessment = $('#assessment').val();
-                        let year = $('#form4_year').val();
-                        console.log('致灾因子:', assessment);
-                        console.log('时间:', year);
-                    }
-                });
+        async function fetchImageData(type, ageing, causing_factor, weather_mod, data_year) {
+            const loadingElement = document.getElementById('loader');
+            // 构建查询参数字符串
+            const queryParams = new URLSearchParams({
+                type,
+                ageing,
+                causing_factor,
+                weather_mod,
+                data_year
             });
+            loadingElement.style.display = 'block';
+            try {
+                // 发送GET请求
+                const response = await fetch(`https://hotdryalert.2ndtool.top/getDataPhoto?${queryParams}`);
+                const data = await response.json(); // 解析JSON响应
+                console.log(data);
+                if(data.code && data.code === 404){
+                    // 数据不存在，显示错误消息
+                    console.error('Data not found:', data.error);
+                    alert('404 Data not found\n数据不存在，请检查筛选条件');
+                    return null;
+                }
+                // 数据存在，显示图像
+                const imageContainer = document.getElementById('image');
+                const imageElement = imageContainer.querySelector('img');
+                imageElement.src = data.base64_image;
+            } catch (error) {
+                // 网络或其他错误
+                console.error('Fetch error:', error);
+                alert('An error occurred while trying to fetch the image data.');
+            }finally {
+                loadingElement.style.display = 'none';
+            }
+        }
 
 
-            // let myChart = echarts.init(document.getElementById('myecharts'));
-            // myChart.clear();  // 清空图表，重新渲染图表
-            // myChart.showLoading();
-            // $.get('https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json', function (geoJson) {
-            //     myChart.hideLoading();
-            //     echarts.registerMap('China', geoJson);
-            //     myChart.setOption(
-            //         (option = {
-            //             title: {
-            //                 text: '中国地图',
-            //                 subtext: 'Data from Wikipedia',
-            //                 sublink:
-            //                     ''
-            //             },
-            //             tooltip: {
-            //                 trigger: 'item',
-            //                 formatter: '{b}<br/>{c} (p / km2)'
-            //             },
-            //             toolbox: {
-            //                 show: true,
-            //                 orient: 'vertical',
-            //                 left: 'right',
-            //                 top: 'center',
-            //                 feature: {
-            //                     dataView: { readOnly: false },
-            //                     restore: {},
-            //                     saveAsImage: {}
-            //                 }
-            //             },
-            //             visualMap: {//用于调整图标
-            //                 min: 800,
-            //                 max: 50000,
-            //                 text: ['High', 'Low'],
-            //                 realtime: false,
-            //                 calculable: true,
-            //                 inRange: {
-            //                     color: ['lightskyblue', 'yellow', 'orangered']
-            //                 }
-            //             },
-            //             series: [
-            //                 {
-            //                     name: '中国地图',
-            //                     type: 'map',
-            //                     map: 'China',
-            //                     selectedMode: false,//避免被选中区域显示黄色的问题
-            //                     zoom: 1, //当前视角的缩放比例
-            //                     roam: true, //是否开启平游或缩放
-            //                     scaleLimit: { //滚轮缩放的极限控制
-            //                         min: 1,
-            //                         max: 2
-            //                     },
-            //                     label: {
-            //                         show: false
-            //                     },
-            //                     data: [],
-            //                     // 自定义名称映射
-            //                     nameMap: {}
-            //                 }
-            //             ]
-            //         })
-            //     );
-            // });
+        // 封装暴露性渲染函数
+        function showExposureData(type, year, time) {
+            let myChart = echarts.init(document.getElementById('myecharts'));
+            myChart.clear();  // 清空图表，重新渲染图表
+            myChart.showLoading();
+            $.get('https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json', function (geoJson) {
+                myChart.hideLoading();
+                echarts.registerMap('China', geoJson); // 将注册地图的代码放在数据加载成功的回调函数中
 
-            // 封装暴露性渲染函数
-            function showExposureData(type, year, time) {
-                let myChart = echarts.init(document.getElementById('myecharts'));
-                myChart.clear();  // 清空图表，重新渲染图表
-                myChart.showLoading();
-                $.get('https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json', function (geoJson) {
-                    myChart.hideLoading();
-                    echarts.registerMap('China', geoJson); // 将注册地图的代码放在数据加载成功的回调函数中
+                // 发送 POST 请求获取数据
+                $.post(`https://hotdryalert.2ndtool.top//getSSPDataInfo?type=${type}&time=${time}&year=${year}`, function (responseData) {
+                    // 将后端返回的数据转换成前端需要的格式
+                    let formattedData = [];
+                    let values = []; // 用于存储数据值，以计算最大和最小值
+                    for (let province in responseData) {
+                        let value = responseData[province];
+                        formattedData.push({name: province, value: value});
+                        values.push(value);
+                    }
 
-                    // 发送 POST 请求获取数据
-                    $.post(`https://hotdryalert.2ndtool.top//getSSPDataInfo?type=${type}&time=${time}&year=${year}`, function (responseData) {
-                        // 将后端返回的数据转换成前端需要的格式
-                        let formattedData = [];
-                        let values = []; // 用于存储数据值，以计算最大和最小值
-                        for (let province in responseData) {
-                            let value = responseData[province];
-                            formattedData.push({ name: province, value: value });
-                            values.push(value);
-                        }
+                    // 计算最大和最小值
+                    let max = Math.max(...values);
+                    let min = Math.min(...values);
 
-                        // 计算最大和最小值
-                        let max = Math.max(...values);
-                        let min = Math.min(...values);
-
-                        // 设置图表的数据和选项
-                        myChart.setOption({
-                            title: {
-                                text: '中国地图',
-                                subtext: 'Data from Wikipedia',
-                                sublink: ''
-                            },
-                            tooltip: {
-                                trigger: 'item',
-                                formatter: '{b}<br/>{c} (p / km2)'
-                            },
-                            toolbox: {
-                                show: true,
-                                orient: 'vertical',
-                                left: 'right',
-                                top: 'center',
-                                feature: {
-                                    dataView: { readOnly: false },
-                                    restore: {},
-                                    saveAsImage: {}
-                                }
-                            },
-                            visualMap: {
-                                min: min, // 使用计算的最小值
-                                max: max, // 使用计算的最大值
-                                text: ['High', 'Low'],
-                                realtime: false,
-                                calculable: true,
-                                inRange: {
-                                    color: ['lightskyblue', 'yellow', 'orangered']
-                                }
-                            },
-                            series: [
-                                {
-                                    name: '中国地图',
-                                    type: 'map',
-                                    map: 'China',
-                                    selectedMode: false,
-                                    zoom: 1,
-                                    roam: true,
-                                    scaleLimit: {
-                                        min: 1,
-                                        max: 2
-                                    },
-                                    label: {
-                                        show: false
-                                    },
-                                    data: formattedData, // 使用转换后的数据
-                                    nameMap: {}
-                                }
-                            ]
-                        });
+                    // 设置图表的数据和选项
+                    myChart.setOption({
+                        title: {
+                            text: '中国地图',
+                            subtext: 'Data from Wikipedia',
+                            sublink: ''
+                        },
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: '{b}<br/>{c} (p / km2)'
+                        },
+                        toolbox: {
+                            show: true,
+                            orient: 'vertical',
+                            left: 'right',
+                            top: 'center',
+                            feature: {
+                                dataView: {readOnly: false},
+                                restore: {},
+                                saveAsImage: {}
+                            }
+                        },
+                        visualMap: {
+                            min: min, // 使用计算的最小值
+                            max: max, // 使用计算的最大值
+                            text: ['High', 'Low'],
+                            realtime: false,
+                            calculable: true,
+                            inRange: {
+                                color: ['lightskyblue', 'yellow', 'orangered']
+                            }
+                        },
+                        series: [
+                            {
+                                name: '中国地图',
+                                type: 'map',
+                                map: 'China',
+                                selectedMode: false,
+                                zoom: 1,
+                                roam: true,
+                                scaleLimit: {
+                                    min: 1,
+                                    max: 2
+                                },
+                                label: {
+                                    show: false
+                                },
+                                data: formattedData, // 使用转换后的数据
+                                nameMap: {}
+                            }
+                        ]
                     });
                 });
-            }
+            });
+        }
 
 
+    </script>
 
-        </script>
-
-    </div>
+</div>
 
 </body>
 
