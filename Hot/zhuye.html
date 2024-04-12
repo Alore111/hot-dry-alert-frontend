@@ -60,49 +60,49 @@
         </div>
 
         <div class="chaxun">
-            <p>
-                查询面板
-            </p>
 
-            <!-- <div class="time-radio">
-            <label>
-                <input type="radio" value="his" name="time" >his
-            </label>
-            <label>
-                <input type="radio" value="126" name="time">126
-            </label>
-            <label>
-                <input type="radio" value="245" name="time">245
-            </label>
-            <label>
-                <input type="radio" value="370" name="time">370
-            </label>
-            <label>
-                <input type="radio" value="585" name="time">585
-            </label>
-            <span class="time-selection"></span>
-        </div> -->
+            <p>查询面板</p>
+
+            <div class="time-radio" name="ageing">
+                <p style="margin-top: 30px;">时效</p>
+                <label>
+                    <input type="radio" value="his" name="time" checked>his
+                </label>
+                <label>
+                    <input type="radio" value="126" name="time">126
+                </label>
+                <label>
+                    <input type="radio" value="245" name="time">245
+                </label>
+                <label>
+                    <input type="radio" value="370" name="time">370
+                </label>
+                <label>
+                    <input type="radio" value="585" name="time">585
+                </label>
+                <span class="time-selection"></span>
+            </div>
 
             <div>
                 <p>
                     致灾因子：
                 </p>
-                <select class="biaodan">
-                    <option value="sumht" selected>极端高温量</option>
-                    <option value="dht">极端高温日数</option>
-                    <option value="ny">暖夜（TN90p）</option>
-                    <option value="nz">暖昼（TX90p）</option>
-                    <option value="sumsm">夏日日数（SU）</option>
-                    <option value="sumry">热夜日数（TR）</option>
-                    <option value="maxsum">年最大最高日数（TXx）</option>
+                <select class="biaodan" id="causing_factor">
+                    <option value="jiduangaowenliang" selected>极端高温量</option>
+                    <option value="jiduangaowenrishu">极端高温日数</option>
+                    <option value="nuanye(TN90P)">暖夜（TN90p）</option>
+                    <option value="nuanzhou(TX90P)">暖昼（TX90p）</option>
+                    <option value="xiaririshu(SU)">夏日日数（SU）</option>
+                    <option value="reyerishu(TR)">热夜日数（TR）</option>
+                    <option value="nianzuidazuigaowendu(TXx)">年最大最高温度（TXx）</option>
+                    <option value="nianzuixiaozuigaowendu(TXn)">年最小最高温度（TXx）</option>
                 </select>
             </div>
 
             <div>
                 <p>时间：</p>
                 <label>
-                    <input type="text" value="" name="year" placeholder="year" class="biaodan 
-                ">
+                    <input type="number" value="2022" id="data_year" placeholder="year" class="biaodan">
                 </label>
             </div>
 
@@ -110,7 +110,7 @@
                 <p>
                     数据类型：
                 </p>
-                <select class="biaodan">
+                <select class="biaodan" id="weather_mod">
                     <option value="ACCESS-CM2">ACCESS-CM2</option>
                     <option value="bcc_cma">bcc_cma</option>
                     <option value="CN0.511">CN05.11</option>
@@ -122,24 +122,44 @@
                 </select>
             </div>
 
-
+            <div>
+                <button onclick="generateLink()">确定</button>
+                <span style="font-size: 18px;" id="isGetting"></span>
+            </div>
 
         </div>
 
-        <div class="zhanshi">
-            <!-- <div style="display:flex;justify-content: center;z-index: 90;box-shadow: 5px 5px #818080;">
-                <div id="myecharts"
-                    style="width: 80vw;height: 90vh;background-color: #ffffff;display:flex;align-items:center;justify-content: center;">
-                </div>
-            </div> -->
-        </div>
+        <div class="zhanshi" id="zhanshi"></div>
+
         <script type="text/javascript" src="js\map.js"></script>
         <script type="text/javascript">
+            // 生成链接函数
+            function generateLink() {
+                const type = "hot";
+                const ageing = document.querySelector('input[name="time"]:checked').value;
+                const causing_factor = document.getElementById("causing_factor").value;
+                const weather_mod = document.getElementById("weather_mod").value;
+                const data_year = document.getElementById("data_year").value;
+                const apiLink = `https://hotdryalert.2ndtool.top/getDataPhoto?type=${type}&ageing=${ageing}&causing_factor=${causing_factor}&weather_mod=${weather_mod}&data_year=${data_year}`;
 
-
-
-
+                document.getElementById("isGetting").innerText = "请求中";
+                // 发送请求并显示返回的数据
+                fetch(apiLink)
+                    .then(response => response.json())
+                    .then(data => {
+                        const zhanshiDiv = document.getElementById("zhanshi");
+                        document.getElementById("isGetting").innerText = "";
+                        if (data.base64_image) {
+                            zhanshiDiv.innerHTML = `<img src="${data.base64_image}" alt="Data Image">`;
+                        } else if (data.error) {
+                            zhanshiDiv.innerText = data.error;
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
         </script>
+        </script>
+
 
 
 </body>

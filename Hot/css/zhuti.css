@@ -110,6 +110,12 @@
     overflow: hidden;
 }
 
+.zhanshi img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
 
 .containter{
     margin-top: 2px;
