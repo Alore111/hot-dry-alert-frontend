@@ -51,10 +51,10 @@
                 <li>
                     <a href="baolu.html">暴露度</a>
                 </li>
-
-                <li>
-                    <a href="cuiruo.html">脆弱性</a>
-                </li>
+<!--数据缺失，脆弱性不显示-->
+<!--                <li>-->
+<!--                    <a href="cuiruo.html">脆弱性</a>-->
+<!--                </li>-->
 
             </ul>
         </div>
@@ -153,12 +153,14 @@
                             zhanshiDiv.innerHTML = `<img src="${data.base64_image}" alt="Data Image">`;
                         } else if (data.error) {
                             zhanshiDiv.innerText = data.error;
+                            console.error('Data not found:', data.error);
+                            alert('404 Data not found\n数据不存在，请检查筛选条件');
                         }
                     })
                     .catch(error => console.error('Error:', error));
             }
         </script>
-        </script>
+        </div>
 
 
 
