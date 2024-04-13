@@ -39,7 +39,6 @@
 }
 .cebian{
     width: 350px;
-    height: 900px;
     background-color: deepskyblue;
     overflow: hidden;
 }
@@ -104,8 +103,8 @@
 }
 .zhanshi{
     width: 100%;
-    height: 90vh;
-    background-color:rgb(174, 201, 236);
+    /*height: 90vh;*/
+    background-color:#ffffff;
     margin-left: 2px;
     overflow: hidden;
 }
@@ -122,4 +121,19 @@
     width: 100%;
     height: 100%;
     display: flex;
+}
+
+.beizhu{
+    width:100%;
+    height:100%;
+    background-color:#ffffff;
+}
+.beizhu h3{
+    width: 100%;
+    margin: 2px;
+}
+.beizhu div{
+    width: 100%;
+    font-size: 22px;
+    font-family: "宋体";
 }
