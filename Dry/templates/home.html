@@ -38,6 +38,8 @@
                     查询面板
                 </button>
 
+
+
                 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
                      aria-labelledby="offcanvasExampleLabel">
                     <div class="offcanvas-header">
@@ -93,8 +95,8 @@
                                     <select id="form1_indicators" name="indicators">
                                         <option value="leijiganhanliang">累计干旱量</option>
                                         <option value="jiduanganhanrishu">极端干旱日数</option>
-                                        <option value="CDD">持续干旱指数</option>
-                                        <option value="CWD">持续湿润指数</option>
+                                        <option value="CDD">持续干旱指数CDD</option>
+                                        <option value="CWD">持续湿润指数CWD</option>
                                     </select>
                                 </div>
                                 <div>
@@ -106,7 +108,6 @@
                                 <div>
                                     <h3>气候模式：</h3>
                                     <select id="models" name="models">
-                                        <option value="ACCESS-CM2">ACCESS-CM2</option>
                                         <option value="bcc_cma">bcc_cma</option>
                                         <option value="CN0.511">CN05.11</option>
                                         <option value="cnrm6">cnrm6</option>
@@ -120,6 +121,8 @@
                                     <input type="submit" value="确定">
                                 </div>
                             </form>
+                            <img src="../static/img/CDD.png" style="width: 90%;">
+                            <img src="../static/img/CWD.png" style="width: 90%;">
                         </div>
                         <div id="page2" class="control-page" style="display: none">
                             <!-- 页面2的内容 -->
@@ -191,8 +194,12 @@
                             </form>
                         </div>
 
+
                     </div>
                 </div>
+            </div>
+            <div id="map_label">
+                <img src="" style="display: none;width: 190px;object-fit: cover;margin-top: 200px;position: absolute;z-index: 99">
             </div>
         </div>
         <div style="width: 80vw;height: 90vh;display:flex;justify-content: center;z-index: 90;box-shadow: 5px 5px #818080;">
@@ -264,7 +271,7 @@
                     let causing_factor = $('#assessment').val();
                     let data_year = $('#form4_year').val();
                     console.log('类型：',type);
-                    console.log('观测:', ageing);
+                    console.log('观测(ageing):', ageing);
                     console.log('致灾因子:', causing_factor);
                     console.log('时间:', data_year);
                     fetchImageData(type, ageing, causing_factor, '', data_year);
@@ -273,6 +280,18 @@
         });
 
         async function fetchImageData(type, ageing, causing_factor, weather_mod, data_year) {
+            let mylabel = document.getElementById('map_label');
+            let label_img = mylabel.querySelector("img");
+            label_img.style.display = 'block';
+            let img_path = '../static/img/'
+            console.log(ageing);
+            if(ageing != 'his' && ageing != 'guance'){
+                label_img.src = img_path+'pre'+'-'+causing_factor+'.png';
+            }else{
+                label_img.src = img_path+ageing+'-'+causing_factor+'.png';
+            }
+            console.log(img_path+ageing+'-'+causing_factor+'.png');
+
             const loadingElement = document.getElementById('loader');
             // 构建查询参数字符串
             const queryParams = new URLSearchParams({
@@ -282,29 +301,29 @@
                 weather_mod,
                 data_year
             });
-            loadingElement.style.display = 'block';
-            try {
-                // 发送GET请求
-                const response = await fetch(`https://hotdryalert.2ndtool.top/getDataPhoto?${queryParams}`);
-                const data = await response.json(); // 解析JSON响应
-                console.log(data);
-                if(data.code && data.code === 404){
-                    // 数据不存在，显示错误消息
-                    console.error('Data not found:', data.error);
-                    alert('404 Data not found\n数据不存在，请检查筛选条件');
-                    return null;
-                }
-                // 数据存在，显示图像
-                const imageContainer = document.getElementById('image');
-                const imageElement = imageContainer.querySelector('img');
-                imageElement.src = data.base64_image;
-            } catch (error) {
-                // 网络或其他错误
-                console.error('Fetch error:', error);
-                alert('An error occurred while trying to fetch the image data.');
-            }finally {
-                loadingElement.style.display = 'none';
-            }
+            // loadingElement.style.display = 'block';
+            // try {
+            //     // 发送GET请求
+            //     const response = await fetch(`https://hotdryalert.2ndtool.top/getDataPhoto?${queryParams}`);
+            //     const data = await response.json(); // 解析JSON响应
+            //     console.log(data);
+            //     if(data.code && data.code === 404){
+            //         // 数据不存在，显示错误消息
+            //         console.error('Data not found:', data.error);
+            //         alert('404 Data not found\n数据不存在，请检查筛选条件');
+            //         return null;
+            //     }
+            //     // 数据存在，显示图像
+            //     const imageContainer = document.getElementById('image');
+            //     const imageElement = imageContainer.querySelector('img');
+            //     imageElement.src = data.base64_image;
+            // } catch (error) {
+            //     // 网络或其他错误
+            //     console.error('Fetch error:', error);
+            //     alert('An error occurred while trying to fetch the image data.');
+            // }finally {
+            //     loadingElement.style.display = 'none';
+            // }
         }
 
 
