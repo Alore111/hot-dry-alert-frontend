@@ -115,8 +115,8 @@
                     数据类型：
                 </p>
                 <select class="biaodan" id="weather_mod">
-                    <option value="ACCESS-CM2">ACCESS-CM2</option>
                     <option value="bcc_cma">bcc_cma</option>
+                    <option value="ACCESS-CM2">ACCESS-CM2</option>
                     <option value="CN0.511">CN05.11</option>
                     <option value="cnrm6">cnrm6</option>
                     <option value="HadGEM3-GC31-LL">HadGEM3-GC31-LL</option>
@@ -159,21 +159,21 @@
                 console.log(causing_factor);
                 label_img.src = img_path+'label-'+causing_factor+'.png';
                 document.getElementById("isGetting").innerText = "请求中";
-                // 发送请求并显示返回的数据
-                // fetch(apiLink)
-                //     .then(response => response.json())
-                //     .then(data => {
-                //         const zhanshiDiv = document.getElementById("zhanshi");
-                //         document.getElementById("isGetting").innerText = "";
-                //         if (data.base64_image) {
-                //             zhanshiDiv.innerHTML = `<img src="${data.base64_image}" alt="Data Image">`;
-                //         } else if (data.error) {
-                //             zhanshiDiv.innerText = data.error;
-                //             console.error('Data not found:', data.error);
-                //             alert('404 Data not found\n数据不存在，请检查筛选条件');
-                //         }
-                //     })
-                //     .catch(error => console.error('Error:', error));
+                //发送请求并显示返回的数据
+                fetch(apiLink)
+                    .then(response => response.json())
+                    .then(data => {
+                        const zhanshiDiv = document.getElementById("zhanshi");
+                        document.getElementById("isGetting").innerText = "";
+                        if (data.base64_image) {
+                            zhanshiDiv.innerHTML = `<img src="${data.base64_image}" alt="Data Image">`;
+                        } else if (data.error) {
+                            zhanshiDiv.innerText = data.error;
+                            console.error('Data not found:', data.error);
+                            alert('404 Data not found\n数据不存在，请检查筛选条件');
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
             }
         </script>
         </div>
