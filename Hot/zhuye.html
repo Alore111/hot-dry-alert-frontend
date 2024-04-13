@@ -99,7 +99,7 @@
                     <option value="xiaririshu">夏日日数（SU）</option>
                     <option value="reyerishu">热夜日数（TR）</option>
                     <option value="nianzuidazuigaowendu">年最大最高温度（TXx）</option>
-                    <option value="nianzuixiaozuigaowendu">年最小最高温度（TXx）</option>
+                    <option value="nianzuixiaozuigaowendu">年最小最高温度（TXn）</option>
                 </select>
             </div>
 
@@ -132,6 +132,10 @@
                 <button onclick="generateLink()">确定</button>
                 <span style="font-size: 18px;" id="isGetting"></span>
             </div>
+            <div id="map_label">
+                <img src=""
+                     style="display: none;width: 260px;object-fit: cover;margin-top: 10px;position: absolute;z-index: 99">
+            </div>
 
         </div>
 
@@ -148,22 +152,28 @@
                 const data_year = document.getElementById("data_year").value;
                 const apiLink = `https://hotdryalert.2ndtool.top/getDataPhoto?type=${type}&ageing=${ageing}&causing_factor=${causing_factor}&weather_mod=${weather_mod}&data_year=${data_year}`;
 
+                let mylabel = document.getElementById('map_label');
+                let label_img = mylabel.querySelector("img");
+                label_img.style.display = 'block';
+                let img_path = 'phto/label/';
+                console.log(causing_factor);
+                label_img.src = img_path+'label-'+causing_factor+'.png';
                 document.getElementById("isGetting").innerText = "请求中";
                 // 发送请求并显示返回的数据
-                fetch(apiLink)
-                    .then(response => response.json())
-                    .then(data => {
-                        const zhanshiDiv = document.getElementById("zhanshi");
-                        document.getElementById("isGetting").innerText = "";
-                        if (data.base64_image) {
-                            zhanshiDiv.innerHTML = `<img src="${data.base64_image}" alt="Data Image">`;
-                        } else if (data.error) {
-                            zhanshiDiv.innerText = data.error;
-                            console.error('Data not found:', data.error);
-                            alert('404 Data not found\n数据不存在，请检查筛选条件');
-                        }
-                    })
-                    .catch(error => console.error('Error:', error));
+                // fetch(apiLink)
+                //     .then(response => response.json())
+                //     .then(data => {
+                //         const zhanshiDiv = document.getElementById("zhanshi");
+                //         document.getElementById("isGetting").innerText = "";
+                //         if (data.base64_image) {
+                //             zhanshiDiv.innerHTML = `<img src="${data.base64_image}" alt="Data Image">`;
+                //         } else if (data.error) {
+                //             zhanshiDiv.innerText = data.error;
+                //             console.error('Data not found:', data.error);
+                //             alert('404 Data not found\n数据不存在，请检查筛选条件');
+                //         }
+                //     })
+                //     .catch(error => console.error('Error:', error));
             }
         </script>
         </div>
