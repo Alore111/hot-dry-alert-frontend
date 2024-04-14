@@ -25,7 +25,8 @@
         <ul class="list">
             <h2>干旱评估及决策系统</h2>
             <li class="l1"><a href="home.html" style="font-size: 1.5em;">干旱</a></li>
-            <li class="l1"><a href="decision.html"><b>防范决策</b></a></li>
+            <li class="l1"><a href="introduce.html">科普</a></li>
+            <li class="l1"><a href="decision.html">防范决策</a></li>
             <li class="l2"><a href="login.html">登录</a></li>
         </ul>
     </div>
@@ -329,6 +330,9 @@
 
         // 封装暴露性渲染函数
         function showExposureData(type, year, time) {
+            let mylabel = document.getElementById('map_label');
+            let label_img = mylabel.querySelector("img");
+            label_img.style.display = 'none';
             let myChart = echarts.init(document.getElementById('myecharts'));
             myChart.clear();  // 清空图表，重新渲染图表
             myChart.showLoading();
