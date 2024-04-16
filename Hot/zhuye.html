@@ -139,7 +139,15 @@
 
         </div>
 
-        <div class="zhanshi" id="zhanshi"></div>
+        <div class="zhanshi" id="zhanshi">
+
+        </div>
+        <div id="nanhai" style="display: none;bottom: -150px;right: 0;width: 200px;z-index: 95;position: absolute">
+            <img src="phto/nanhai.png" style="width: 100%;object-fit: cover">
+        </div>
+        <div id="map_GS" style="display: none;bottom: -150px;left: 550px;width: 200px;z-index: 95;position: absolute">
+            <img src="phto/map_GS.png" style="width: 100%;object-fit: cover">
+        </div>
 
         <script type="text/javascript" src="js\map.js"></script>
         <script type="text/javascript">
@@ -154,6 +162,10 @@
 
                 let mylabel = document.getElementById('map_label');
                 let label_img = mylabel.querySelector("img");
+                let map_GS = document.getElementById('map_GS');
+                let nanhai = document.getElementById('nanhai');
+                map_GS.style.display = 'block';
+                nanhai.style.display = 'block';
                 label_img.style.display = 'block';
                 let img_path = 'phto/label/';
                 console.log(causing_factor);
