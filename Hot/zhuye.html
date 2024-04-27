@@ -143,7 +143,11 @@
         <div class="zhanshi" id="zhanshi"></div>
 
         <div id="nanhai" style="display: none;bottom: 10px;right: 140px;width: 200px;z-index: 95;position: absolute">
-            <img src="phto/nanhai.png" style="width: 100%;object-fit: cover;transform: translateX(120px);">
+            <img src="phto/nanhai.png" style="width: 100%;object-fit: cover;transform: translateX(120px) translateY(-53px);">
+        </div>
+
+        <div id="shengtuhao" style="display: none;bottom: 10px;right: 140px;width: 200px;z-index: 95;position: absolute">
+            <img src="phto/map_GS.png" style="width: 100%;object-fit: cover;transform: translateX(120px);">
         </div>
         
         <script type="text/javascript" src="js\map.js"></script>
@@ -163,6 +167,9 @@
 
                 let nanhai = document.getElementById('nanhai');
                 nanhai.style.display = 'block';
+
+                let shengtuhao = document.getElementById('shengtuhao');
+                shengtuhao.style.display = 'block';
 
                 let img_path = 'phto/label/';
                 console.log(causing_factor);
